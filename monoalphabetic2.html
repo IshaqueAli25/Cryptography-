@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monoalphabetic Cipher Decryption</title>
+    <style>
+        body {
+            background-image: url("bg3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 50px;
+        }
+
+        .container {
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1aa91a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+            font-size: large;
+        }
+
+        #result {
+            color: rgb(8, 2, 2);
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monoalphabetic Cipher</h1>
+        <label for="inputText">Enter Text: </label>
+        <textarea id="inputText" rows="4" cols="50"></textarea>
+        <br><br>
+        <label for="key">Key (Alphabet Mapping): </label>
+        <input type="text" id="key" value="ABCDEFGHIJKLMNOPQRSTUVWXYZ">
+        <br><br>
+        
+        <button class="button" onclick="decryptText()">Decrypt</button>
+        <br><br>
+        <label for="result">Result: </label>
+        <textarea id="result" rows="4" cols="50"></textarea>
+    </div>
+
+    <script>
+       
+
+        function decryptMonoalphabeticCipher(text, key) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const mapping = {};
+
+            for (let i = 0; i < alphabet.length; i++) {
+                mapping[key[i]] = alphabet[i];
+            }
+
+            let result = '';
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i].toUpperCase();
+                if (mapping[char]) {
+                    result += mapping[char];
+                } else {
+                    result += char;
+                }
+            }
+
+            return result;
+        }
+
+       
+
+        function decryptText() {
+            let text = document.getElementById("inputText").value;
+            let key = document.getElementById("key").value;
+            let result = decryptMonoalphabeticCipher(text, key);
+            document.getElementById("result").value = result;
+        }
+    </script>
+</body>
+</html>

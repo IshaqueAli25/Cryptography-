@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Page</title>
+   
+    <style>
+        body {
+            background-image: url("bg3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items:center;
+            height: 100vh;
+            margin: 0;
+            position: absolute;
+            padding-left: 170px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 200px;
+            font-size: larger;
+        }
+
+        .button-container {
+            text-align: left;
+            padding-left:auto;
+        }
+
+        .button {
+            padding: 20px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .button-2 {
+            padding: 20px 20px;
+            font-size: 16px;
+            background-color: #9f1414;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .button-3 {
+            padding: 20px 20px;
+            font-size: 16px;
+            background-color: #1aa91a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome</h1>
+    </div>
+    <div class="button-container">
+        <a href="Optionpage1.html" target="_blank" ><button class="button" >Encrypt</button></a>
+        <a href="optionpage2.html" target="_blank" ><button class="button-3" >Decrypt</button></a>
+        <button class="button-2" onclick="javascript:window.close()" >Close</button>
+    </div>
+</body>
+</html>

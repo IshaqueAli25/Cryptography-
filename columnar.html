@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Columnar Cipher Encryption</title>
+    <style>
+        body {
+            background-image: url("bg3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 50px;
+        }
+
+        .container {
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+            font-size: large;
+        }
+
+        #result {
+            color: rgb(8, 2, 2);
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Columnar Cipher</h1>
+        <label for="inputText">Enter Text: </label>
+        <textarea id="inputText" rows="4" cols="50">Mir Ishaque Ali</textarea>
+        <br><br>
+        <label for="key">Key: </label>
+        <input type="text" id="key" value="KEY">
+        <br><br>
+        <button class="button" onclick="encryptText()">Encrypt</button>
+        <br><br>
+        <label for="result">result: </label>
+        <textarea id="result" rows="4" cols="50"></textarea>
+      
+    </div>
+
+    <script>
+        function encryptColumnarCipher(text, key) {
+            const keyLength = key.length;
+            const textLength = text.length;
+            const columns = keyLength;
+            const rows = Math.ceil(textLength / columns);
+
+            let matrix = new Array(rows).fill().map(() => new Array(columns).fill(' '));
+
+            let k = 0;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < columns; j++) {
+                    if (k < textLength) {
+                        matrix[i][j] = text[k];
+                        k++;
+                    }
+                }
+            }
+
+            let result = '';
+            for (let j = 0; j < columns; j++) {
+                const index = key.indexOf(key[j]);
+                for (let i = 0; i < rows; i++) {
+                    result += matrix[i][index];
+                }
+            }
+
+            return result;
+        }
+
+        function encryptText() {
+            let text = document.getElementById("inputText").value;
+            let key = document.getElementById("key").value;
+            let result = encryptColumnarCipher(text, key);
+            document.getElementById("result").value = result;
+        }
+    </script>
+</body>
+</html>

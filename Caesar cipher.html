@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Caesar Cipher Encryption</title>
+    <style>
+        body {
+            background-image: url("bg3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            align-items: center; 
+            height: 100vh;
+            margin: 0;
+            font-size: 50px;
+        }
+
+        .container {
+            color: white;
+            padding: 20px;
+            text-align: center; 
+        }
+
+        .button {
+            padding: 30px 30px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 300px; 
+            height: 100px;
+            font-size: large; 
+           
+         
+        }
+
+        #result {
+            color: rgb(14, 12, 12);
+            padding: 20px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Caesar Cipher</h1>
+        <label for="inputText">Enter Text: </label>
+        <textarea id="inputText" rows="4" cols="50">Mir Ishaque Ali</textarea>
+        <br><br>
+        <label for="shift">Shift: </label>
+        <input type="number" id="shift" min="1" step="1" value="1" >
+        <br><br>
+        <button class="button" onclick="encryptText()">Encrypt</button>
+        <br><br>
+        <label for="result">result: </label>
+        <textarea id="result" rows="4" cols="50"></textarea>
+
+
+    </div>
+
+    
+    <script>
+        function encrypt(text, shift) {
+            let result = "";
+            for (let i = 0; i < text.length; i++) {
+                let char = text[i];
+                if (char.match(/[a-z]/i)) {
+                    let isLowerCase = char === char.toLowerCase();
+                    let codeA = isLowerCase ? 'a'.charCodeAt(0) : 'A'.charCodeAt(0);
+                    let ch = String.fromCharCode(((char.charCodeAt(0) - codeA + shift) % 26) + codeA);
+                    result += ch;
+                } else {
+                    result += char;
+                }
+            }
+            return result;
+        }
+        function encryptText() {
+            let text = document.getElementById("inputText").value;
+            let shift = parseInt(document.getElementById("shift").value);
+            let result = encrypt(text, shift);
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modified Caesar Cipher Decryption</title>
+    <style>
+         body {
+            background-image: url("bg3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 50px;
+        }
+
+        .container {
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #1aa91a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+            font-size: large;
+        }
+
+        #result {
+            color: rgb(8, 2, 2);
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Modified Caesar Cipher</h1>
+        <label for="inputText">Enter Text: </label>
+        <textarea id="inputText" rows="4" cols="50"></textarea>
+        <br><br>
+        <label for="key">Shift Values (comma-separated): </label>
+        <input type="text" id="key" value="1,2,3">
+        <br><br>
+        
+        <button class="button" onclick="decryptText()">Decrypt</button>
+        <br><br>
+        <label for="result">Result: </label>
+        <textarea id="result" rows="4" cols="50"></textarea>
+    </div>
+
+    <script>
+        
+        function decryptModifiedCaesarCipher(text, shifts) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            shifts = shifts.split(',').map(Number);
+            let result = '';
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i].toUpperCase();
+                if (alphabet.includes(char)) {
+                    const index = alphabet.indexOf(char);
+                    const shift = shifts[i % shifts.length];
+                    const shiftedIndex = (index - shift + alphabet.length) % alphabet.length;
+                    const shiftedChar = alphabet[shiftedIndex];
+                    result += shiftedChar;
+                } else {
+                    result += char;
+                }
+            }
+
+            return result;
+        }
+
+       
+        function decryptText() {
+            let text = document.getElementById("inputText").value;
+            let key = document.getElementById("key").value;
+            let result = decryptModifiedCaesarCipher(text, key);
+            document.getElementById("result").value = result;
+        }
+    </script>
+</body>
+</html>

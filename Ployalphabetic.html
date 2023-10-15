@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Polyalphabetic Cipher Encryption</title>
+    <style>
+        body {
+            background-image: url("bg3.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-size: 50px;
+        }
+
+        .container {
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+            font-size: large;
+        
+        }
+
+        #result {
+            color: rgb(8, 2, 2);
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Polyalphabetic Cipher</h1>
+        <label for="inputText">Enter Text: </label>
+        <textarea id="inputText" rows="4" cols="50">Mir Ishaque Ali</textarea>
+        <br><br>
+        <label for="key">Keyword: </label>
+        <input type="text" id="key" value="KEY">
+        <br><br>
+        <button class="button" onclick="encryptText()">Encrypt</button>
+        <br><br>
+        <label for="result">result: </label>
+        <textarea id="result" rows="4" cols="50"></textarea>
+    </div>
+
+    
+    <script>
+        function encryptPolyalphabeticCipher(text, key) {
+            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const keyword = key.toUpperCase();
+            let result = '';
+
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i].toUpperCase();
+                if (alphabet.includes(char)) {
+                    const keywordChar = keyword[i % keyword.length];
+                    const keywordIndex = alphabet.indexOf(keywordChar);
+                    const shiftAmount = alphabet.indexOf(char) + keywordIndex;
+                    const shiftedChar = alphabet[shiftAmount % alphabet.length];
+                    result += shiftedChar;
+                } else {
+                    result += char;
+                }
+            }
+
+            return result;
+        }
+
+        function encryptText() {
+            let text = document.getElementById("inputText").value;
+            let key = document.getElementById("key").value;
+            let result = encryptPolyalphabeticCipher(text, key);
+            document.getElementById("result").value = result;
+        }
+    </script>
+</body>
+</html>
